@@ -72,11 +72,12 @@
 
     <div class="feed" id="feed"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
         const SUPABASE_URL = 'https://iypxhfjaxfdxfoubnefm.supabase.co'; // Replace with your Supabase URL
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5cHhoZmpheGZkeGZvdWJuZWZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ1NzQwOTksImV4cCI6MjA1MDE1MDA5OX0.3tJFpY7Xth-NGA55hcqCTDnL8bHZbxKsiSBHP6pZihM'; // Replace with your Supabase Key
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
         const hamburger = document.querySelector('.hamburger');
         const uploadForm = document.getElementById('upload-form');
@@ -85,14 +86,8 @@
 
         // Toggle upload form visibility
         hamburger.addEventListener('click', () => {
-    if (uploadForm.style.display === '' || uploadForm.style.display === 'none') {
-        uploadForm.style.display = 'flex';
-    } else {
-        uploadForm.style.display = 'none';
-    }
-});
-
-
+            uploadForm.style.display = uploadForm.style.display === 'none' || uploadForm.style.display === '' ? 'flex' : 'none';
+        });
 
         // Fetch and display all images on load
         async function loadFeed() {
@@ -163,3 +158,4 @@
     </script>
 </body>
 </html>
+
